@@ -1,0 +1,29 @@
+ ! NOAA/PMEL TMAP
+ ! PyFerret v7.4 (optimized)
+ ! Linux 3.10.0-514.21.1.el7.x86_64 - 05/16/18
+ ! 21-May-20 16:17     
+
+set mode verify
+use mh_bootstrap_correction.nc
+use obs_major.nc
+let sm$1 = bootmiss[y=@sbx:$1]
+let sosm = samplei_multi(sorti(sm$1[d=1]),sm$1[d=1])
+
+let bootcorr = bootmiss[d=1]+obs_major_on_y[d=2]
+use "landfall.nc"
+def ax /t=1:1:1 tat
+def grid /t=tat gag
+let fl_bootmiss = transpose_yt(bootmiss[d=1]+t[g=gag]*0)
+save /clobber/file=fl_bootmiss.nc fl_bootmiss[gt=obs_major[d=2]@asn]
+can var fl_bootmiss
+use fl_bootmiss.nc
+
+let flfix = fl_bootmiss[d=4]+obs_major[d=2]
+let lfrat = usma[d=3,l=@sbx:$1,gt=obs_major[d=2]]/flfix[l=@sbx:$1]
+let solfra = samplei_multi(sorti(lfrat),lfrat)
+
+set win 1
+set win /asp=0.7
+plot /vlimits=0:0.6 solfra[i=250],solfra[i=9750],solfra[i=5000]
+plot /ov/nolab/line=5 usma[d=3,l=@sbx:$1]/obs_major[d=2,l=@sbx:$1]
+frame/file=FIGURE3b_$1.ps

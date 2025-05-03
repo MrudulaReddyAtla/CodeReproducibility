@@ -1,0 +1,19 @@
+ ! NOAA/PMEL TMAP
+ ! PyFerret v7.4 (optimized)
+ ! Linux 3.10.0-514.21.1.el7.x86_64 - 05/16/18
+ ! 22-May-20 08:58     
+
+set mode verify
+use mh_bootstrap_correction.nc
+use obs_major.nc
+use hu_bootstrap_correction.nc
+use recorded_hurricanes.nc
+let fixma = bootmiss[d=1]+obs_major_on_y[d=2]
+let fixhu = bootmiss40[d=3]+hu_on_y[d=4]
+let rat = fixma[y=@sbx:15]/fixhu[y=@sbx:15]
+let soo = samplei_multi(sorti(rat),rat)
+set win /asp=0.7
+plot /vlimits=0:0.65/line=5/nolab soo[i=250],soo[i=9750]
+plot /ov/nolab/line=10 soo[i=5000]
+plot /ov/nolab/line=7 obs_major_on_y[d=2,j=@sbx:15]/hu_on_y[d=4,j=@sbx:15]
+frame/file=FIG4.ps

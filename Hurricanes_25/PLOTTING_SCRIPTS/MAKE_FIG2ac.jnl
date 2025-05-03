@@ -1,0 +1,30 @@
+ ! NOAA/PMEL TMAP
+ ! PyFerret v7.4 (optimized)
+ ! Linux 3.10.0-514.21.1.el7.x86_64 - 05/16/18
+
+! This makes figures 2a or 2c - for 2a use argument "1" for 2c use argument "15"
+! e.g., "echo go MAKE_FIGURE2ac.jnl 15 | pyferret" to make Figure 2c.
+
+set mode verify
+use hu_bootstrap_correction.nc
+use recorded_hurricanes.nc
+let sm$1 = bootmiss40[y=@sbx:$1]
+let sosm = samplei_multi(sorti(sm$1[d=1]),sm$1[d=1])
+set win 1
+set win /asp=0.7
+! Plots median, mean, 2.5% and 97.5% range on correction from 10000 member bootstrap
+plot /vlimits=0:20/hlimits=1850:2020/line=7/nolab sosm[i=5000] ! Median - change vlimits to fit figure
+plot/ov/nolab/line=8 sosm[i=@ave]  ! Mean
+plot /ov/nolab/line=2 sosm[i=250],sosm[i=9750]  ! 95% range
+
+plot /ov/nolab/line=7 sosm[i=5000]+hu_on_y[d=2,j=@sbx:$1] ! Median
+plot /ov/nolab/line=10 sosm[i=@ave]+hu_on_y[d=2,j=@sbx:$1] ! Mean
+plot /ov/nolab/line=5 sosm[i=250]+hu_on_y[d=2,j=@sbx:$1],sosm[i=9750]+hu_on_y[d=2,j=@sbx:$1]
+frame/file=FIGURE2_Hurricane_sbx$1.ps
+
+let p025_sbx$1 = sosm[i=5000]+hu_on_y[d=2,j=@sbx:$1]
+let p5_sbx$1 = sosm[i=5000]+hu_on_y[d=2,j=@sbx:$1]
+let p025_sbx$1 = sosm[i=250]+hu_on_y[d=2,j=@sbx:$1]
+let p975_sbx$1 = sosm[i=9750]+hu_on_y[d=2,j=@sbx:$1]
+save /clobber/file=HU_sbx$1_ranges.nc p5_sbx$1,p025_sbx$1,p975_sbx$1
+

@@ -1,0 +1,18 @@
+ ! NOAA/PMEL TMAP
+ ! PyFerret v7.4 (optimized)
+ ! Linux 3.10.0-514.21.1.el7.x86_64 - 05/16/18
+ ! 16-Mar-21 15:45     
+
+set mode verify
+use hu_missed_all.nc
+sh da
+set win /asp=0.5
+plot /vlimits=0:3.5/line=13 miss40[k=@ave,i=@ave,l=@ave]
+let mami =  mask*miss40
+let mask = if i[g=miss40] ge 9 then 1; plot/line=2/nolab/ov mami[k=@ave,i=@ave,l=@ave]
+let mask = if i[g=miss40] le 8 or i[g=miss40] ge 17 then 1; plot/line=3/nolab/ov mami[k=@ave,i=@ave,l=@ave]
+let mask = if i[g=miss40] le 16 or i[g=miss40] ge 25 then 1; plot/line=4/nolab/ov mami[k=@ave,i=@ave,l=@ave]
+let mask = if i[g=miss40] le 24 or i[g=miss40] ge 33 then 1; plot/line=5/nolab/ov mami[k=@ave,i=@ave,l=@ave]
+let mask = if i[g=miss40] le 32 or i[g=miss40] ge 41 then 1; plot/line=6/nolab/ov mami[k=@ave,i=@ave,l=@ave]
+let mask = if i[g=miss40] le 40 then 1; plot/line=9/nolab/ov mami[k=@ave,i=@ave,l=@ave]
+frame/file=k6_leave_out_satellite_hu.ps

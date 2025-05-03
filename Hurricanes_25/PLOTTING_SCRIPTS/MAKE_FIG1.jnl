@@ -1,0 +1,44 @@
+ ! NOAA/PMEL TMAP
+ ! PyFerret v7.4 (optimized)
+ ! Linux 3.10.0-514.21.1.el7.x86_64 - 05/16/18
+
+set mode verify
+use landfall.nc ! Open observed US striking hurricane/MH record
+use recorded_hurricanes.nc ! Open observed basinwide hurricane record
+use obs_major.nc ! Open observed major hurricane record
+!
+set view ul
+! Plot US Hurricane Strikes
+plot /nolab/vlimits/line=4/vlimits=0:7.5 ushu[d=1]; plot /title="US HU Strikes"/ov/line=7 ushu[d=1,l=@sbx:15]
+set view ur
+! Plots US Major Hurricane Strikes
+plot /nolab/vlimits/line=2/vlimits=0:4 usma[d=1]; plot /title="US MA Strikes"/ov/line=7 usma[d=1,l=@sbx:15]
+
+!!!!!!!!!!!!!!!!!!!!!!!!!
+!  Calculates the correlation
+!  for a time period of  two variables P,Q
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+let P_ave = P[l=@sum]/P[l=@ngd]
+let Q_ave = Q[l=@sum]/Q[l=@ngd]
+let P_dsq = (P - P_ave)^2
+let Q_dsq = (Q - Q_ave)^2
+let PQ_dsq = (Q - Q_ave)*(P - P_ave)
+let P_var = P_dsq[l=@sum]/P_dsq[l=@ngd]
+let Q_var = Q_dsq[l=@sum]/Q_dsq[l=@ngd]
+let PQ_covar = PQ_dsq[l=@sum]/PQ_dsq[l=@ngd]
+let PQ_correl = PQ_covar/((P_var*Q_var)^0.5)
+!
+set view ll
+! Plot NA Recorded Hurricanes
+let p = hu[d=2]
+let q = l[g=hu[d=2]]
+plot /line=4/nolab/vlimits=0:16 p; plot/ov/line=7/title="NA HU" p[l=@sbx:15]; plot /ov/line=5/nolab pq_correl*(p_var/q_var)^0.5*(q-q_ave)+p_ave
+!
+set view lr
+! Plot NA Recorded Major Hurricanes
+let p = obs_major[d=3]
+let q = l[g=obs_major[d=3]]
+plot /line=2/nolab/vlimits=0:7.5 p; plot/ov/line=7/title="NA MA" p[l=@sbx:15]; plot /ov/line=5/nolab pq_correl*(p_var/q_var)^0.5*(q-q_ave)+p_ave
+!
+! Save as a postscript
+frame/file=FIGURE1.ps

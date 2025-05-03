@@ -1,0 +1,8 @@
+ ! NOAA/PMEL TMAP
+ ! PyFerret v7.64 (optimized)
+ ! Darwin 19.6.0 - 12/10/21
+ ! 24-Apr-25 15:25     
+
+set mode verify
+go MAKE_FIG1.jnl
+EXIT /PROGRAM

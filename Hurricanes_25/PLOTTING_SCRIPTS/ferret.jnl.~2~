@@ -1,0 +1,16 @@
+ ! NOAA/PMEL TMAP
+ ! PyFerret v7.64 (optimized)
+ ! Darwin 19.6.0 - 12/10/21
+ ! 24-Apr-25 14:26     
+
+set mode verify
+yes
+use "/Users/mrudulareddy/Documents/Hurricanes_25/landfall.nc"
+echo go load_data.jnl | pyferret
+yes? go load_data.jnl
+echo go MAKE_FIG1.jnl | pyferret
+use "/Users/mrudulareddy/Documents/Hurricanes_25/landfall.nc"
+echo go MAKE_FIG1.jnl | pyferret
+go MAKE_FIG1.jnl | pyferret
+yes
+exit

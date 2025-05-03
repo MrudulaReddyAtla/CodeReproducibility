@@ -1,0 +1,29 @@
+ ! NOAA/PMEL TMAP
+ ! PyFerret v7.4 (optimized)
+ ! Linux 3.10.0-514.21.1.el7.x86_64 - 05/16/18
+ ! 21-May-20 16:17     
+
+set mode verify
+use hu_bootstrap_correction.nc
+use recorded_hurricanes.nc
+let sm$1 = bootmiss40[y=@sbx:$1]
+let sosm = samplei_multi(sorti(sm$1[d=1]),sm$1[d=1])
+
+let bootcorr = bootmiss40[d=1]+hu_on_y[d=2]
+use "landfall.nc"
+def ax /t=1:1:1 tat
+def grid /t=tat gag
+let fl_bootmiss40 = transpose_yt(bootmiss40[d=1]+t[g=gag]*0)
+save /clobber/file=fl_bootmiss40.nc fl_bootmiss40[gt=hu[d=2]@asn]
+can var fl_bootmiss40
+use fl_bootmiss40.nc
+
+let flfix = fl_bootmiss40[d=4]+hu[d=2]
+let lfrat = ushu[d=3,l=@sbx:$1,gt=hu[d=2]]/flfix[l=@sbx:$1]
+let solfra = samplei_multi(sorti(lfrat),lfrat)
+
+set win 1
+set win /asp=0.7
+plot /vlimits=0:0.6 solfra[i=250],solfra[i=9750],solfra[i=5000]
+plot /ov/nolab/line=5 ushu[d=3,l=@sbx:$1]/hu[d=2,l=@sbx:$1]
+frame/file=FIGURE3a_$1.ps
