@@ -1,0 +1,119 @@
+---
+title: ML comparison"
+output: html_notebook
+---
+
+Note that, to generate the results in this section, we used the shell file 
+s_jobScheduler_ml_hypers_set.sh
+
+
+```{r}
+rm(list=ls())
+library(tidyverse)
+library(reshape2)
+library(rstan)
+library(latex2exp)
+library(caret)
+library(gbm)
+options(mc.cores=4)
+rstan_options(auto_write = TRUE)
+source("monitornew.R")
+source("r_star_monitor.R")
+```
+
+# AR1
+```{r}
+orders <- c("rf", "xgbTree", "gbm", "knn", "multinom", "svmLinear")
+lookup <- tibble(method=orders,
+                 new=c("RF", "xgbTree", "GBM", "KNN", "GLM", "SVM"))
+
+temp_df <- readRDS("../data/ml_comp_hypers_set_ar1.rds")  %>% 
+  filter(method!="xgbTree") %>%
+  select(method, iter, r_star, time) %>% 
+  left_join(lookup, by="method") %>% 
+  select(-method) %>% 
+  rename(method=new) %>% 
+  mutate(method=as.factor(method)) %>% 
+  mutate(method=fct_relevel(method, lookup$new)) %>% 
+  rename(`R*`=r_star, `Time`=time) %>% 
+  melt(id.vars=c("method", "iter")) %>% 
+  group_by(method, variable) %>% 
+  summarise(lower=quantile(value, 0.25),
+            middle=quantile(value, 0.5),
+            upper=quantile(value, 0.75)) %>% 
+  mutate(model="A. AR(1)")
+```
+
+# 8 schools
+```{r}
+temp_df1 <- readRDS("../data/ml_comp_hypers_set_8_schools.rds")  %>% 
+  filter(method!="xgbTree") %>%
+  select(method, iter, r_star, time) %>% 
+  left_join(lookup, by="method") %>% 
+  select(-method) %>% 
+  rename(method=new) %>% 
+  mutate(method=as.factor(method)) %>% 
+  mutate(method=fct_relevel(method, lookup$new)) %>% 
+  rename(`R*`=r_star, `Time`=time) %>% 
+  melt(id.vars=c("method", "iter")) %>% 
+  group_by(method, variable) %>% 
+  summarise(lower=quantile(value, 0.25),
+            middle=quantile(value, 0.5),
+            upper=quantile(value, 0.75)) %>% 
+  mutate(model="D. 8 schools")
+```
+
+# Cauchy
+```{r}
+temp_df2 <- readRDS("../data/ml_comp_hypers_set_cauchy.rds") %>% 
+  filter(method!="xgbTree") %>%
+  select(method, iter, r_star, time) %>% 
+  left_join(lookup, by="method") %>% 
+  select(-method) %>% 
+  rename(method=new) %>% 
+  mutate(method=as.factor(method)) %>% 
+  mutate(method=fct_relevel(method, lookup$new)) %>% 
+  rename(`R*`=r_star, `Time`=time) %>% 
+  melt(id.vars=c("method", "iter")) %>% 
+  group_by(method, variable) %>% 
+  summarise(lower=quantile(value, 0.25),
+            middle=quantile(value, 0.5),
+            upper=quantile(value, 0.75)) %>% 
+  mutate(model="C. Cauchy")
+```
+
+# Multivariate normal
+```{r}
+temp_df3 <- readRDS("../data/ml_comp_hypers_set_normal_250.rds") %>% 
+  filter(method!="xgbTree") %>%
+  select(method, iter, r_star, time) %>% 
+  left_join(lookup, by="method") %>% 
+  select(-method) %>% 
+  rename(method=new) %>% 
+  mutate(method=as.factor(method)) %>% 
+  mutate(method=fct_relevel(method, lookup$new)) %>% 
+  rename(`R*`=r_star, `Time`=time) %>% 
+  melt(id.vars=c("method", "iter")) %>% 
+  group_by(method, variable) %>% 
+  summarise(lower=quantile(value, 0.25),
+            middle=quantile(value, 0.5),
+            upper=quantile(value, 0.75)) %>% 
+  mutate(model="B. 250D normal")
+
+g1 <- temp_df %>%
+  bind_rows(temp_df1) %>% 
+  bind_rows(temp_df2) %>% 
+  bind_rows(temp_df3) %>% 
+  mutate(model=fct_relevel(as.factor(model), "A. AR(1)", "B. 250D normal", "C. Cauchy", "D. 8 schools")) %>%
+  ggplot(aes(x=as.factor(method), y=middle)) +
+  geom_pointrange(aes(ymin=lower, ymax=upper)) +
+  xlab("Method") +
+  ylab("Value") +
+  theme(text=element_text(size=16, colour="black"),
+        axis.text = element_text(colour="black"),
+        legend.position = c(0.83, 0.79),
+        legend.text = element_text(size=12, colour="black"),
+        legend.title = element_text(size=14, colour="black")) +
+  facet_grid(vars(variable), vars(model), scales="free")
+ggsave("../output/ml_comparison_all.pdf", g1, width = 12, height = 6)
+```

@@ -1,0 +1,659 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Autoregressive example},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Autoregressive example}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{())}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.2     v tibble    3.2.1
+## v lubridate 1.9.4     v tidyr     1.3.1
+## v purrr     1.0.4     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(reshape2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'reshape2'
+## 
+## The following object is masked from 'package:tidyr':
+## 
+##     smiths
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rstan)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: StanHeaders
+## 
+## rstan version 2.32.7 (Stan version 2.32.2)
+## 
+## For execution on a local, multicore CPU with excess RAM we recommend calling
+## options(mc.cores = parallel::detectCores()).
+## To avoid recompilation of unchanged Stan programs, we recommend calling
+## rstan_options(auto_write = TRUE)
+## For within-chain threading using `reduce_sum()` or `map_rect()` Stan functions,
+## change `threads_per_chain` option:
+## rstan_options(threads_per_chain = 1)
+## 
+## 
+## Attaching package: 'rstan'
+## 
+## The following object is masked from 'package:tidyr':
+## 
+##     extract
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(latex2exp)}
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lattice
+## 
+## Attaching package: 'caret'
+## 
+## The following object is masked from 'package:purrr':
+## 
+##     lift
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gbm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loaded gbm 2.2.2
+## This version of gbm is no longer under development. Consider transitioning to gbm3, https://github.com/gbm-developers/gbm3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(mvtnorm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{mc.cores=}\DecValTok{4}\NormalTok{)}
+\FunctionTok{rstan\_options}\NormalTok{(}\AttributeTok{auto\_write =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{source}\NormalTok{(}\StringTok{"monitornew.R"}\NormalTok{)}
+\FunctionTok{source}\NormalTok{(}\StringTok{"r\_star\_monitor.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## This is posterior version 1.6.1
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'posterior'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked _by_ '.GlobalEnv':
+## 
+##     autocorrelation, autocovariance, ess_bulk, ess_mean, ess_quantile,
+##     ess_sd, ess_tail, mcse_mean, mcse_quantile, mcse_sd, r_scale, rhat,
+##     split_chains, u_scale, z_scale
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:rstan':
+## 
+##     ess_bulk, ess_tail
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     mad, sd, var
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     %in%, match
+\end{verbatim}
+
+Functions to generate simulated data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f\_ar1 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(rho, sigma, L)\{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\AttributeTok{length =}\NormalTok{ L)}
+\NormalTok{  x[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\AttributeTok{sd=}\NormalTok{sigma)}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\NormalTok{L)}
+\NormalTok{    x[i] }\OtherTok{=}\NormalTok{ rho }\SpecialCharTok{*}\NormalTok{ x[i }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\AttributeTok{sd=}\NormalTok{sigma)}
+  \FunctionTok{return}\NormalTok{(x)}
+\NormalTok{\}}
+
+\CommentTok{\# Generates three chains with same var; one with a different var}
+\NormalTok{f\_generate\_lower\_var\_four }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(var\_ratio, rho, sigma, L)\{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =}\NormalTok{ L, }\AttributeTok{ncol =} \DecValTok{4}\NormalTok{)}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}
+\NormalTok{    x[, i] }\OtherTok{\textless{}{-}} \FunctionTok{f\_ar1}\NormalTok{(rho, sigma, L)}
+\NormalTok{  z }\OtherTok{\textless{}{-}} \FunctionTok{f\_ar1}\NormalTok{(rho, sigma }\SpecialCharTok{*} \FunctionTok{sqrt}\NormalTok{(var\_ratio), L)}
+\NormalTok{  x[, }\DecValTok{4}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ z}
+  \FunctionTok{return}\NormalTok{(x)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Calculate R* and Rhat across 1000 replicates
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f\_replicate }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{()\{}
+\NormalTok{  temp }\OtherTok{\textless{}{-}} \FunctionTok{f\_generate\_lower\_var\_four}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2000}\NormalTok{)}
+\NormalTok{  a\_array }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\AttributeTok{dim=}\FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\NormalTok{  a\_array[,,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp}
+\NormalTok{  a\_accuracy }\OtherTok{\textless{}{-}} \FunctionTok{r\_star}\NormalTok{(a\_array, }\AttributeTok{method =} \StringTok{"gbm"}\NormalTok{)}
+\NormalTok{  mon }\OtherTok{\textless{}{-}} \FunctionTok{monitor\_extra}\NormalTok{(a\_array)}
+\NormalTok{  rhat }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(mon}\SpecialCharTok{$}\NormalTok{zsRhat, mon}\SpecialCharTok{$}\NormalTok{zfsRhat)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{r\_star=}\NormalTok{a\_accuracy, }\AttributeTok{r\_hat=}\NormalTok{rhat))}
+\NormalTok{\}}
+
+\NormalTok{nreplicates }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{r\_star\_vals }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\AttributeTok{length =}\NormalTok{ nreplicates)}
+\NormalTok{r\_hat\_vals }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\AttributeTok{length =}\NormalTok{ nreplicates)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nreplicates)\{}
+  \ControlFlowTok{if}\NormalTok{(i}\SpecialCharTok{\%\%}\DecValTok{100}\SpecialCharTok{==}\DecValTok{0}\NormalTok{)}
+    \FunctionTok{print}\NormalTok{(i)}
+  
+\NormalTok{  temp }\OtherTok{\textless{}{-}} \FunctionTok{f\_replicate}\NormalTok{()}
+\NormalTok{  r\_star\_vals[i] }\OtherTok{\textless{}{-}}\NormalTok{ temp}\SpecialCharTok{$}\NormalTok{r\_star}
+\NormalTok{  r\_hat\_vals[i] }\OtherTok{\textless{}{-}}\NormalTok{ temp}\SpecialCharTok{$}\NormalTok{r\_hat}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 100
+## [1] 200
+## [1] 300
+## [1] 400
+## [1] 500
+## [1] 600
+## [1] 700
+## [1] 800
+## [1] 900
+## [1] 1000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# saveRDS(tibble(r\_star=r\_star\_vals, r\_hat=r\_hat\_vals), "../data/ar1\_r\_star\_hat.rds")}
+\end{Highlighting}
+\end{Shaded}
+
+Plot results
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reses }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"../data/ar1\_r\_star\_hat.rds"}\NormalTok{)}
+\NormalTok{r\_star\_vals }\OtherTok{\textless{}{-}}\NormalTok{ reses}\SpecialCharTok{$}\NormalTok{r\_star }
+\NormalTok{r\_hat\_vals }\OtherTok{\textless{}{-}}\NormalTok{ reses}\SpecialCharTok{$}\NormalTok{r\_hat }
+\NormalTok{g2 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{accuracy=}\NormalTok{r\_star\_vals, }\AttributeTok{iteration=}\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, nreplicates, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{accuracy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$R*$"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"B."}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{18}\NormalTok{, }\AttributeTok{colour=}\StringTok{"black"}\NormalTok{),}
+        \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{16}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{xlim}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{1.45}\NormalTok{)}
+
+\NormalTok{g2a }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{accuracy=}\NormalTok{r\_hat\_vals, }\AttributeTok{iteration=}\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, nreplicates, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{accuracy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"Split{-}$}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{hat\{R\}$"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"C."}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{18}\NormalTok{, }\AttributeTok{colour=}\StringTok{"black"}\NormalTok{),}
+        \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{16}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{xlim}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{1.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Look at predictions of model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# add in a column of noise since gbm requires \textgreater{}1 variables}
+\NormalTok{full\_data }\OtherTok{\textless{}{-}} \FunctionTok{f\_generate\_lower\_var\_four}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2000}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{melt}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Var1) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{chain=}\NormalTok{Var2) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{ran\_val=}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{8000}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{chain=}\FunctionTok{as.factor}\NormalTok{(chain))}
+
+\NormalTok{caretGrid }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{interaction.depth=}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{), }\AttributeTok{n.trees =} \DecValTok{50}\NormalTok{,}
+                   \AttributeTok{shrinkage=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{),}
+                   \AttributeTok{n.minobsinnode=}\DecValTok{10}\NormalTok{)}
+
+\NormalTok{rand\_samples }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(full\_data), }\FloatTok{0.7} \SpecialCharTok{*} \FunctionTok{nrow}\NormalTok{(full\_data))}
+\NormalTok{training\_data }\OtherTok{\textless{}{-}}\NormalTok{ full\_data[rand\_samples, ]}
+\NormalTok{testing\_data }\OtherTok{\textless{}{-}}\NormalTok{ full\_data[}\SpecialCharTok{{-}}\NormalTok{rand\_samples, ]}
+\NormalTok{gbmFit1 }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(chain }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ training\_data, }
+                 \AttributeTok{method =} \StringTok{"gbm"}\NormalTok{,}
+                 \AttributeTok{trControl =} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{\textquotesingle{}none\textquotesingle{}}\NormalTok{), }
+                    \AttributeTok{tuneGrid =}\NormalTok{ caretGrid, }\AttributeTok{verbose=}\ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{g1 }\OtherTok{\textless{}{-}}\NormalTok{ testing\_data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(value) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{predictions=}\FunctionTok{predict}\NormalTok{(}\AttributeTok{object=}\NormalTok{gbmFit1, .)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{value, }\AttributeTok{y=}\NormalTok{predictions)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{height =} \FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Value"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Chain classification"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{18}\NormalTok{, }\AttributeTok{colour=}\StringTok{"black"}\NormalTok{),}
+        \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"A."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Generate R* distribution based on 2000 iterations for run where chain
+has lower variance and another where all four chains have same variance
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{temp }\OtherTok{\textless{}{-}} \FunctionTok{f\_generate\_lower\_var\_four}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2000}\NormalTok{) }
+\NormalTok{temp1 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{8000}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2000}\NormalTok{)}
+\NormalTok{a\_array }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\AttributeTok{dim=}\FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{a\_array[,,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp}
+\NormalTok{a\_array[,,}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp1}
+\NormalTok{unmixed }\OtherTok{\textless{}{-}} \FunctionTok{r\_star}\NormalTok{(a\_array, }\AttributeTok{method =} \StringTok{"gbm"}\NormalTok{, }\AttributeTok{uncertainty =}\NormalTok{ T)}
+
+\NormalTok{temp }\OtherTok{\textless{}{-}} \FunctionTok{f\_generate\_lower\_var\_four}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2000}\NormalTok{)}
+\NormalTok{temp1 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{8000}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{1000}\NormalTok{)}
+\NormalTok{a\_array }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\AttributeTok{dim=}\FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{a\_array[,,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp}
+\NormalTok{a\_array[,,}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp1}
+\NormalTok{mixed }\OtherTok{\textless{}{-}} \FunctionTok{r\_star}\NormalTok{(a\_array, }\AttributeTok{method =} \StringTok{"gbm"}\NormalTok{, }\AttributeTok{uncertainty =}\NormalTok{ T)}
+
+\NormalTok{mAR1 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(unmixed, mixed)}
+\NormalTok{g3 }\OtherTok{\textless{}{-}} 
+\NormalTok{  mAR1 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{melt}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{value, }\AttributeTok{fill=}\FunctionTok{as.factor}\NormalTok{(variable))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{position=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_grey}\NormalTok{(}\StringTok{"Series"}\NormalTok{, }\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Unmixed"}\NormalTok{, }\StringTok{"Mixed"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$R*$"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \DecValTok{1}\NormalTok{, }\AttributeTok{linetype=}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"D."}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{18}\NormalTok{, }\AttributeTok{colour=}\StringTok{"black"}\NormalTok{),}
+        \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{),}
+        \AttributeTok{legend.position =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{0.8}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{, }\FloatTok{1.45}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## No id variables; using all as measure variables
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2
+## 3.5.0.
+## i Please use the `legend.position.inside` argument of `theme()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pdf}\NormalTok{(}\StringTok{"../output/ar1.pdf"}\NormalTok{, }\AttributeTok{width =} \DecValTok{12}\NormalTok{, }\AttributeTok{height =} \DecValTok{6}\NormalTok{)}
+\FunctionTok{multiplot}\NormalTok{(g1, g2a, g2, g3, }\AttributeTok{cols =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_bar()`).
+\end{verbatim}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_bar()`).
+\end{verbatim}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 4 rows containing missing values or values outside the scale range
+## (`geom_bar()`).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dev.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## pdf 
+##   2
+\end{verbatim}
+
+\section{Performance as a function of number of
+chains}\label{performance-as-a-function-of-number-of-chains}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f\_generate\_lower\_var\_n }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n\_chains, var\_ratio, rho, sigma, L)\{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =}\NormalTok{ L, }\AttributeTok{ncol =}\NormalTok{ n\_chains)}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(n\_chains }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{))}
+\NormalTok{    x[, i] }\OtherTok{\textless{}{-}} \FunctionTok{f\_ar1}\NormalTok{(rho, sigma, L)}
+\NormalTok{  z }\OtherTok{\textless{}{-}} \FunctionTok{f\_ar1}\NormalTok{(rho, sigma }\SpecialCharTok{*} \FunctionTok{sqrt}\NormalTok{(var\_ratio), L)}
+\NormalTok{  x[, n\_chains] }\OtherTok{\textless{}{-}}\NormalTok{ z}
+  \FunctionTok{return}\NormalTok{(x)}
+\NormalTok{\}}
+
+\NormalTok{f\_replicate\_n }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n\_chains)\{}
+\NormalTok{  temp }\OtherTok{\textless{}{-}} \FunctionTok{f\_generate\_lower\_var\_n}\NormalTok{(n\_chains, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2000}\NormalTok{)}
+\NormalTok{  a\_array }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\AttributeTok{dim=}\FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, n\_chains, }\DecValTok{1}\NormalTok{))}
+\NormalTok{  a\_array[,,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp}
+\NormalTok{  a\_accuracy }\OtherTok{\textless{}{-}} \FunctionTok{r\_star}\NormalTok{(a\_array, }\AttributeTok{method =} \StringTok{"gbm"}\NormalTok{)}
+\NormalTok{  mon }\OtherTok{\textless{}{-}} \FunctionTok{monitor\_extra}\NormalTok{(a\_array)}
+\NormalTok{  rhat }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(mon}\SpecialCharTok{$}\NormalTok{zsRhat, mon}\SpecialCharTok{$}\NormalTok{zfsRhat)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{r\_star=}\NormalTok{a\_accuracy, }\AttributeTok{r\_hat=}\NormalTok{rhat))}
+\NormalTok{\}}
+
+\NormalTok{nreplicates }\OtherTok{\textless{}{-}} \DecValTok{50}
+\NormalTok{lnum\_chains }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{32}\NormalTok{)}
+\NormalTok{mResults }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =}\NormalTok{ nreplicates }\SpecialCharTok{*} \FunctionTok{length}\NormalTok{(lnum\_chains),}
+                   \AttributeTok{ncol =} \DecValTok{4}\NormalTok{)}
+\NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{1}
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(lnum\_chains))\{}
+  \FunctionTok{print}\NormalTok{(j)}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nreplicates)\{}
+\NormalTok{    temp }\OtherTok{\textless{}{-}} \FunctionTok{f\_replicate\_n}\NormalTok{(lnum\_chains[j])}
+\NormalTok{    mResults[k, ] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(lnum\_chains[j], i, temp}\SpecialCharTok{$}\NormalTok{r\_star, temp}\SpecialCharTok{$}\NormalTok{r\_hat)}
+\NormalTok{    k }\OtherTok{\textless{}{-}}\NormalTok{ k }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(mResults) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"nchains"}\NormalTok{, }\StringTok{"iterate"}\NormalTok{, }\StringTok{"R*"}\NormalTok{, }\StringTok{"split{-}Rhat"}\NormalTok{)}
+\NormalTok{mResults }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(mResults)}
+\FunctionTok{saveRDS}\NormalTok{(mResults, }\StringTok{"../data/ar1\_numchains.rds"}\NormalTok{)}
+\NormalTok{mResults }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"../data/ar1\_numchains.rds"}\NormalTok{)}
+\NormalTok{b\_sum }\OtherTok{\textless{}{-}}\NormalTok{ mResults }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{melt}\NormalTok{(}\AttributeTok{id.vars=}\FunctionTok{c}\NormalTok{(}\StringTok{"nchains"}\NormalTok{, }\StringTok{"iterate"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(nchains, variable) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{lower=}\FunctionTok{quantile}\NormalTok{(value, }\FloatTok{0.25}\NormalTok{),}
+         \AttributeTok{upper=}\FunctionTok{quantile}\NormalTok{(value, }\FloatTok{0.75}\NormalTok{),}
+         \AttributeTok{middle=}\FunctionTok{quantile}\NormalTok{(value, }\FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'nchains'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g }\OtherTok{\textless{}{-}}\NormalTok{ mResults }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{melt}\NormalTok{(}\AttributeTok{id.vars=}\FunctionTok{c}\NormalTok{(}\StringTok{"nchains"}\NormalTok{, }\StringTok{"iterate"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(b\_sum, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"nchains"}\NormalTok{, }\StringTok{"variable"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{variable=}\FunctionTok{if\_else}\NormalTok{(variable}\SpecialCharTok{==}\StringTok{"split{-}Rhat"}\NormalTok{, }\StringTok{"Split{-}Rhat"}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(variable))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{as.factor}\NormalTok{(nchains), }\AttributeTok{y=}\NormalTok{value)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{colour=}\StringTok{"grey"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_pointrange}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{lower, }\AttributeTok{y=}\NormalTok{middle, }\AttributeTok{ymax=}\NormalTok{upper)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{variable) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"\# chains"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Value"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_grey}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{16}\NormalTok{),}
+        \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{16}\NormalTok{),}
+        \AttributeTok{strip.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{16}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"../output/ar1\_numchains.pdf"}\NormalTok{, g, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Investigating stochasticity of
+R*}\label{investigating-stochasticity-of-r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f\_replicate\_samplesize }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(temp, samplesize)\{}
+\NormalTok{  a\_array }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\AttributeTok{dim=}\FunctionTok{c}\NormalTok{(samplesize, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\NormalTok{  a\_array[,,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp}
+\NormalTok{  a\_accuracy }\OtherTok{\textless{}{-}} \FunctionTok{r\_star}\NormalTok{(a\_array, }\AttributeTok{method =} \StringTok{"gbm"}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{r\_star=}\NormalTok{a\_accuracy))}
+\NormalTok{\}}
+
+
+\NormalTok{lsample\_sizes }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{500}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\DecValTok{2000}\NormalTok{, }\DecValTok{4000}\NormalTok{, }\DecValTok{8000}\NormalTok{)}
+\NormalTok{nreplicates }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{mResults }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =}\NormalTok{ nreplicates }\SpecialCharTok{*} \FunctionTok{length}\NormalTok{(lsample\_sizes),}
+                   \AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{1}
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(lsample\_sizes))\{}
+  \FunctionTok{print}\NormalTok{(j)}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{f\_generate\_lower\_var\_four}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\DecValTok{1}\NormalTok{, lsample\_sizes[j])}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nreplicates)\{}
+\NormalTok{    temp }\OtherTok{\textless{}{-}} \FunctionTok{f\_replicate\_samplesize}\NormalTok{(x, lsample\_sizes[j])}
+\NormalTok{    mResults[k, ] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(lsample\_sizes[j], i, temp}\SpecialCharTok{$}\NormalTok{r\_star)}
+\NormalTok{    k }\OtherTok{\textless{}{-}}\NormalTok{ k }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(mResults) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"n"}\NormalTok{, }\StringTok{"iterate"}\NormalTok{, }\StringTok{"R*"}\NormalTok{)}
+\NormalTok{mResults }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(mResults)}
+\FunctionTok{saveRDS}\NormalTok{(mResults, }\StringTok{"../data/ar1\_numsamples.rds"}\NormalTok{)}
+\NormalTok{mResults }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"../data/ar1\_numsamples.rds"}\NormalTok{)}
+
+\NormalTok{b\_sum }\OtherTok{\textless{}{-}}\NormalTok{ mResults }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{melt}\NormalTok{(}\AttributeTok{id.vars=}\FunctionTok{c}\NormalTok{(}\StringTok{"n"}\NormalTok{, }\StringTok{"iterate"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(n, variable) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{lower=}\FunctionTok{quantile}\NormalTok{(value, }\FloatTok{0.025}\NormalTok{),}
+         \AttributeTok{upper=}\FunctionTok{quantile}\NormalTok{(value, }\FloatTok{0.975}\NormalTok{),}
+         \AttributeTok{middle=}\FunctionTok{quantile}\NormalTok{(value, }\FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'n'. You can override using the `.groups`
+## argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g }\OtherTok{\textless{}{-}}\NormalTok{ mResults }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{melt}\NormalTok{(}\AttributeTok{id.vars=}\FunctionTok{c}\NormalTok{(}\StringTok{"n"}\NormalTok{, }\StringTok{"iterate"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(b\_sum, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"n"}\NormalTok{, }\StringTok{"variable"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(variable}\SpecialCharTok{!=}\StringTok{"split{-}Rhat"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{as.factor}\NormalTok{(n), }\AttributeTok{y=}\NormalTok{value)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{colour=}\StringTok{"grey"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_pointrange}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{lower, }\AttributeTok{y=}\NormalTok{middle, }\AttributeTok{ymax=}\NormalTok{upper)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Sample size"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"Split{-}R*"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_grey}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{16}\NormalTok{),}
+        \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{20}\NormalTok{),}
+        \AttributeTok{strip.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{16}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"../output/ar1\_samplesize.pdf"}\NormalTok{, g, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

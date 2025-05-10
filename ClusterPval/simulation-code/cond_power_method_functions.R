@@ -1,6 +1,7 @@
 norm_vec <- function(x) sqrt(sum(x^2))
 
 
+
 make_iso <- function(link, K) {
   new_method(name = sprintf("%s-iso-test-K-%s", link, K),
              label = sprintf("Isotropic (%s, K=%s)", link, K),
